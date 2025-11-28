@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class HomePage extends BasePage {
 
     private final By insiderLogo = By.cssSelector("[alt='insider_logo']");
-    private final By homepageHero = By.cssSelector("[id='desktop_hero_24']");
+    private final By headerMenu = By.id("navbarNavDropdown");
     private final By companyMenu = By.xpath("//a[contains(text(), 'Company')]"); //mouse over ile açılan menü
     private final By careersLinkInMenu = By.xpath("//a[contains(text(), 'Careers')]");
 
@@ -15,21 +15,19 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public HomePage openHomepage() {
+    public void openPage() {
         driver.get(BASE_URL);
-        return this;
     }
 
     public boolean isInsiderLogoOpened() {
         return waitForVisible(insiderLogo).isDisplayed();
     }
-    public boolean isHomepageHeroOpened() {
-        return waitForVisible(homepageHero).isDisplayed();
+    public boolean isHeaderMenuOpened() {
+        return waitForVisible(headerMenu).isDisplayed();
     }
-    public CareersPage goToCareersPageViaCompanyMenu() {
+    public void goToCareersPageFromCompanyMenu() {
         hover(companyMenu);
         click(careersLinkInMenu);
-        return new CareersPage(driver);
     }
 
 }

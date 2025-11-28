@@ -15,7 +15,7 @@ public abstract class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     protected WebElement waitForVisible(By locator) {
@@ -29,5 +29,18 @@ public abstract class BasePage {
     protected void click(By locator) {
         waitForVisible(locator).click();
     }
-}
 
+    protected WebElement scrollToElement(By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return element;
+
+        } catch (Exception e) {
+            System.out.println("Failed to scroll to element: " + locator);
+            throw e;
+        }
+    }
+
+}

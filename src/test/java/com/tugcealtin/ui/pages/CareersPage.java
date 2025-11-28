@@ -17,8 +17,14 @@ public class CareersPage extends BasePage {
     private By createBlockLocator(String blockName) {
         return By.xpath("//h2[contains(text(),'" + blockName + "')]");
     }
+
     private boolean isBlockPresent(String blockName) {
-        return !driver.findElements(createBlockLocator(blockName)).isEmpty();
+        try {
+            waitForVisible(createBlockLocator(blockName));
+            return driver.findElement(createBlockLocator(blockName)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean isLocationsBlockPresent() {

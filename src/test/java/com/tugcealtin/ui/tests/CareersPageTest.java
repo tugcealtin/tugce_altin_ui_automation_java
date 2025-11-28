@@ -8,18 +8,19 @@ import org.testng.asserts.SoftAssert;
 
 public class CareersPageTest extends BaseTest {
 
-
     @Test
     public void verifyCareersPageBlocks() {
         SoftAssert softly = new SoftAssert();
 
         HomePage homePage = new HomePage(driver);
-        homePage.openHomepage();
+        homePage.openPage();
 
         softly.assertTrue(homePage.isInsiderLogoOpened(), "Insider logo is not displayed on the Home page");
-        softly.assertTrue(homePage.isHomepageHeroOpened(), "Homepage hero section is not displayed on the Home page");
+        softly.assertTrue(homePage.isHeaderMenuOpened(), "Header menu section is not displayed on the Home page");
 
-        CareersPage careersPage = homePage.goToCareersPageViaCompanyMenu();
+        homePage.goToCareersPageFromCompanyMenu();
+
+        CareersPage careersPage = new CareersPage(driver);
         careersPage.waitForCareerPageToLoad();
 
         boolean hasLocations = careersPage.isLocationsBlockPresent();
