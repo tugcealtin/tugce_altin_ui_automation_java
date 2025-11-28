@@ -10,7 +10,7 @@ public class QAJobsPageTest extends BaseTest {
 
 
     @Test
-    public void shouldFilterQAJobsInIstanbulAndVerifyDetails() {
+    public void verifyQAJobsInIstanbul() {
         SoftAssert softly = new SoftAssert();
 
         QAJobsPage qaJobsPage = new QAJobsPage(driver);
